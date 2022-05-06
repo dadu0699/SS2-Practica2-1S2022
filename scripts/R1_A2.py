@@ -33,18 +33,16 @@ print(rddTotales.collect())
 
 # %%
 graph = graph_objects.Figure(
-    data=graph_objects.Pie(
-        labels=rddNombres.collect(),
-        values=rddTotales.collect()
+    data=graph_objects.Bar(
+        x=rddNombres.collect(),
+        y=rddTotales.collect()
     ))
 
 graph.update_layout(
-    title_text='Aterrizajes por Aeropuerto',
-    title_font_size=30)
+    title_text='Total de aterrizajes por Aeropuerto',
+    title_font_size=30,
+    yaxis=dict(title='No. Aterrizajes', title_font_size=25),
+    xaxis=dict(title='Aeropuerto', title_font_size=25))
 
-graph.update_traces(
-    hoverinfo='label+percent',
-    textinfo='value',
-    textfont_size=20)
-
+graph.update_traces(overwrite=True, marker={"opacity": 0.5})
 graph.write_html('./work/reports/R1_A2.html', auto_open=True)
